@@ -1,8 +1,8 @@
 if Debug then Debug.beginFile("Cache") end
-OnInit.root("Cache", function(require)
-    require "Hook"
-    local OVERRIDE_CONVERSION_NATIVES = true
-    local OVERRIDE_NATIVE_EVENT_RESPONSES = true
+OnInit.global("Cache", function(require)
+    --require "Hook"
+    local OVERRIDE_CONVERSION_NATIVES = false
+    local OVERRIDE_NATIVE_EVENT_RESPONSES = false
     local OVERRIDE_NATIVE_STRUCTURE_FUNCTIONS = false -- true if using Lua-Infused GUI
     --[[
     Cache v2.0
@@ -81,8 +81,6 @@ OnInit.root("Cache", function(require)
         will cause the table to clear every value from that [firstArgument = {...}]
         So be mindful about that when creating a cache
         Can also be left without keyArgs for default order as is defined by the function
-
-    PS: I wrote this before I realized there's a GetObjectName that directly fetches the name...
 ]]
 
     local NULL = {}
@@ -212,6 +210,7 @@ OnInit.root("Cache", function(require)
         hijackConversionNative("GetLocalizedString")
         hijackConversionNative("GetLocalizedHotkey")
         hijackConversionNative("ParseTags")
+        hijackConversionNative("GetObjectName")
     end
 
     -- Cache Native Event-Responses
